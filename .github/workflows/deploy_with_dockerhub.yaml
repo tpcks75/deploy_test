@@ -80,7 +80,8 @@ jobs:
             echo \"\${timestamp} - Build Triggered.\" >> \$LOG_FILE
             echo \"  ├ Tag               : \$IMAGE_TAG\" >> \$LOG_FILE
             echo \"  ├ Commit Hashvalue  : \$COMMIT_HASH\" >> \$LOG_FILE
-            echo \"  ├ Commit Message    : \$COMMIT_MESSAGE\" >> \$LOG_FILE            echo \"  ├ CI/CD tool        : GitHub Actions\" >> \$LOG_FILE
+            echo \"  ├ Commit Message    : \$COMMIT_MESSAGE\" >> \$LOG_FILE            
+            echo \"  ├ CI/CD tool        : GitHub Actions\" >> \$LOG_FILE
             echo \"  ├ DockerHub Image   : \$IMAGE_NAME:\$IMAGE_TAG\" >> \$LOG_FILE
             echo \"  └ Status            : ✅ Deploy Success\" >> \$LOG_FILE
           "
