@@ -2,12 +2,17 @@
 FROM python:3.12-slim
 
 # git secret 호출 env 설정 - Build-time arguments
+# version tagging을 위해 ARG 사용
 ARG GOOGLE_API_KEY
 ARG WEBSHARE_PROXY_URL
+ARG APP_VERSION
+
 
 # Set as environment variables inside container
+# version tagging을 위해 ENV 사용
 ENV GOOGLE_API_KEY=${GOOGLE_API_KEY}
 ENV WEBSHARE_PROXY_URL=${WEBSHARE_PROXY_URL}
+ENV APP_VERSION=${APP_VERSION}
 
 # 2. 작업 디렉터리 설정
 WORKDIR /app
