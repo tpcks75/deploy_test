@@ -54,8 +54,15 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H 15.164.146.31 >> ~/.ssh/known_hosts
 
-      # 6. EC2에 접속하여 이미지 pull 및 컨테이너 재실행
+      # 6. 로깅을 위한 commit 해쉬값 추출
+      - name: Get short commit hash
+        id: vars
+        run: echo "SHORT_HASH=$(echo $GITHUB_SHA | cut -c1-7)" >> $GITHUB_ENV
+
+      # 7. EC2에 접속하여 이미지 pull 및 컨테이너 재실행
       - name: Deploy to EC2
+        env:
+          SHORT_HASH: ${{ env.SHORT_HASH }}
         run: |
           ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@15.164.146.31 "
             cd goathub_check03
@@ -65,7 +72,7 @@ jobs:
             
             IMAGE_NAME=sechankim/deploy_test
             IMAGE_TAG=${{ github.ref_name }}
-            COMMIT_HASH=${{ github.sha::7 }}
+            COMMIT_HASH=${SHORT_HASH}
             timestamp=\$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')
             LOG_FILE=~/goathub_check03/build.log
       
