@@ -75,8 +75,8 @@ jobs:
             COMMIT_MESSAGE=$(git log -1 --pretty=format:'%s')
             timestamp=\$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')
             LOG_FILE=~/goathub_check03/build.log
-      
 
+            # 로깅
             echo \"\${timestamp} - Build Triggered.\" >> \$LOG_FILE
             echo \"  ├ Tag               : \$IMAGE_TAG\" >> \$LOG_FILE
             echo \"  ├ Commit Hashvalue  : \$COMMIT_HASH\" >> \$LOG_FILE
