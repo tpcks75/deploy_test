@@ -30,12 +30,19 @@ jobs:
 
       # 4. Docker 이미지 빌드 및 DockerHub에 push(env값 추가빌드)
       - name: Build and push image
+        
+        #환경변수설정을 통한 commit tag 정보 전달
+        # 예 : 'v0.0.1' 태그를 사용하여 이미지 버전 관리
+        # 태깅을 trigger로 설정 - github.ref_name은 태깅값값 
+        env:
+          IMAGE_NAME: sechankim/deploy_test
+          IMAGE_TAG: ${{ github.ref_name }}   # 예: 'v0.0.1'
         run: |
           docker build \
           --build-arg GOOGLE_API_KEY=${{ secrets.GOOGLE_API_KEY }} \
           --build-arg WEBSHARE_PROXY_URL=${{ secrets.WEBSHARE_PROXY_URL }} \
-          -t sechankim/deploy_test:latest .
-          docker push sechankim/deploy_test:latest
+          -t $IMAGE_NAME:$IMAGE_TAG .
+          docker push $IMAGE_NAME:$IMAGE_TAG
 
 
       # 5.  SSH를 위해 개인키를 등록하고 EC2 호스트 키 저장.
@@ -54,5 +61,7 @@ jobs:
             docker compose down
             docker compose pull
             docker compose up -d
-            echo "$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S') - Build Triggered" >> ~/goathub_check03/build.log
+
+            timestamp=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')
+            echo "${timestamp} - Build Triggered." >> ~/goathub_check03/build.log
             "
