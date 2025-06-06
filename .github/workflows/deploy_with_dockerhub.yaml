@@ -91,4 +91,16 @@ jobs:
             echo \"  ├ CI/CD tool        : GitHub Actions\" >> \$LOG_FILE
             echo \"  ├ DockerHub Image   : \$IMAGE_NAME:\$IMAGE_TAG\" >> \$LOG_FILE
             echo \"  └ Status            : ✅ Deploy Success\" >> \$LOG_FILE
+            
+            echo "  ├ 서비스 상태 점검 결과" >> \$LOG_FILE
+            for SERVICE in streamlit-app nginx-proxy; do
+                STATUS_LINE="  │  ├ $SERVICE"
+                if docker ps --format '{{.Names}}' | grep -q "$SERVICE"; then
+                    printf "%-26s : ✅ running\n" "$STATUS_LINE" >> \$LOG_FILE
+                else
+                    printf "%-26s : ❌ not running\n" "$STATUS_LINE" >> \$LOG_FILE
+                fi
+            done
+            # 마지막 줄 └ 표시
+            echo "  │  └ 상태 점검 완료" >> \$LOG_FILE
           "
