@@ -45,7 +45,7 @@ jobs:
           docker push $IMAGE_NAME:$IMAGE_TAG
 
 
-      # 5.  SSH를 위해 개인키를 등록하고 EC2 호스트 키 저장.
+      # 5.  SSH를 위해 개인키를 등록하고 EC2 호스트 키 저장
       - name: Set up SSH
         run: |
           mkdir -p ~/.ssh
