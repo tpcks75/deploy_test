@@ -80,7 +80,7 @@ jobs:
             IMAGE_TAG=${{ github.ref_name }}
             COMMIT_HASH=${SHORT_HASH}
             COMMIT_MESSAGE=\"${COMMIT_MESSAGE}\"
-            timestamp=\$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')
+            timestamp=$(TZ=Asia/Seoul date '+%Y-%m-%d %H:%M:%S')
             LOG_FILE=~/goathub_check03/build.log
 
             # 로깅
