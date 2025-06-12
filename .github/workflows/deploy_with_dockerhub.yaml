@@ -84,7 +84,7 @@ jobs:
             LOG_FILE=~/goathub_check03/build.log
 
             # 로깅
-            echo \"\${timestamp} - Build Triggered.\" >> \$LOG_FILE
+            echo "${timestamp} - Build Triggered." >> $LOG_FILE
             echo \"  ├ Tag               : \$IMAGE_TAG\" >> \$LOG_FILE
             echo \"  ├ Commit Hashvalue  : \$COMMIT_HASH\" >> \$LOG_FILE
             echo \"  ├ Commit Message    : \$COMMIT_MESSAGE\" >> \$LOG_FILE            
@@ -92,7 +92,7 @@ jobs:
             echo \"  ├ DockerHub Image   : \$IMAGE_NAME:\$IMAGE_TAG\" >> \$LOG_FILE
             echo \"  └ Status            : ✅ Deploy Success\" >> \$LOG_FILE
             
-            echo \"  ├ 서비스 상태 점검 결과\" >> \$LOG_FILE
+            echo "  ├ 서비스 상태 점검 결과\" >> $LOG_FILE
             for SERVICE in streamlit-app nginx-proxy; do
                 STATUS_LINE="  │  ├ $SERVICE"
                 
