@@ -93,20 +93,20 @@ jobs:
             echo \"  └ Status            : ✅ Deploy Success\" >> \$LOG_FILE
             
             echo "  ├ 서비스 상태 점검 결과\" >> $LOG_FILE
-            for SERVICE in streamlit-app nginx-proxy; do
-                STATUS_LINE="  │  ├ $SERVICE"
-                
-                for i in {1..5}; do
-                    if docker ps --format '{{.Names}}' | grep -q "$SERVICE"; then
-                        printf "%-26s : ✅ running (checked after ${i}s)\n" "$STATUS_LINE" >> \$LOG_FILE
-                        break
-                    fi
-                    sleep 1
-                done
+             #for SERVICE in streamlit-app nginx-proxy; do
+             #   STATUS_LINE="  │  ├ $SERVICE"
+             #   
+             #   for i in {1..5}; do
+             #       if docker ps --format '{{.Names}}' | grep -q "$SERVICE"; then
+             #           printf "%-26s : ✅ running (checked after ${i}s)\n" "$STATUS_LINE" >> \$LOG_FILE
+             #           break
+             #       fi
+             #       sleep 1
+             #   done
 
-                if ! docker ps --format '{{.Names}}' | grep -q "$SERVICE"; then
-                    printf "%-26s : ❌ not running (after 5s)\n" "$STATUS_LINE" >> \$LOG_FILE
-                fi
-            done
-            echo \"  │  └ 상태 점검 완료" >> \$LOG_FILE
+             #   if ! docker ps --format '{{.Names}}' | grep -q "$SERVICE"; then
+             #       printf "%-26s : ❌ not running (after 5s)\n" "$STATUS_LINE" >> \$LOG_FILE
+             #   fi
+             #done
+             #echo \"  │  └ 상태 점검 완료" >> \$LOG_FILE
           EOF
