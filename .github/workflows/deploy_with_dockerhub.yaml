@@ -70,7 +70,7 @@ jobs:
           SHORT_HASH: ${{ env.SHORT_HASH }}
           COMMIT_MESSAGE: ${{ env.COMMIT_MESSAGE }}
         run: |
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@15.164.146.31 "
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ubuntu@15.164.146.31 '
             cd goathub_check03
             docker compose down
             docker compose pull
@@ -109,4 +109,4 @@ jobs:
                 fi
             done
             echo \"  │  └ 상태 점검 완료" >> \$LOG_FILE
-          "
+          '
